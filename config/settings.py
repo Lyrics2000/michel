@@ -30,7 +30,9 @@ INSTALLED_APPS = [
      'farmers',
      'vendors',
      'customers',
-     'products'
+     'products',
+     'cart',
+     'payment'
 ]
 
 MIDDLEWARE = [
@@ -49,7 +51,8 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [ os.path.join(BASE_DIR/'account/templates'),
-        os.path.join(BASE_DIR/'farmers/templates')],
+        os.path.join(BASE_DIR/'farmers/templates'),
+        os.path.join(BASE_DIR/'customers/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

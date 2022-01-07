@@ -1,0 +1,46 @@
+{% load static %}
+<div class="bs-canvas bs-canvas-left position-fixed bg-cart h-100">
+    <div class="bs-canvas-header side-cart-header p-3 ">
+       <div class="d-inline-block  main-cart-title">My Cart <span>({{cart_items}} Items)</span></div>
+       <button type="button" class="bs-canvas-close close" aria-label="Close"><i class="uil uil-multiply"></i></button>
+    </div>
+    <div class="bs-canvas-body">
+       
+       <div class="side-cart-items">
+         {% if cart_quantity %}
+         {% for f in cart_quantity %}
+          <div class="cart-item">
+             <div class="cart-product-img">
+                <img src="{{f.product.product_image.url}}" alt="">
+                
+             </div>
+             <div class="cart-text">
+                <h4>{{f.product.product_title}}</h4>
+              
+                <div class="qty-group">
+                   <div class="quantity buttons_added">
+                      Ksh {{f.product.product_price}} X {{f.quantity}}
+                     
+                   </div>
+                   <div class="cart-item-price">Ksh {{f.total}}</div>
+                </div>
+                <button type="button" class="cart-close-btn"><i class="uil uil-multiply"></i></button>
+             </div>
+          </div>
+          {% endfor %}
+          {% endif %}
+          
+       </div>
+    </div>
+    <div class="bs-canvas-footer">
+     
+       <div class="main-total-cart">
+          <h2>Total</h2>
+          <span>Ksh {{total}}</span>
+       </div>
+       <div class="checkout-cart">
+          <a href="#" class="promo-code"></a>
+          <a href="{% url 'customers:checkout' %}" class="cart-checkout-btn hover-btn">Proceed to Checkout</a>
+       </div>
+    </div>
+ </div>

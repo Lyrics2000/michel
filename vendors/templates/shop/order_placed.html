@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+   {% include './index_files/head.html' %}
+   <body>
+      {% include './index_files/category_model.html' %}
+      {% include './index_files/search_model.html' %}
+      {% include './index_files/bs_canvas.html' %}
+      {% include './index_files/header.html' %}
+      <div class="wrapper">
+         <div class="gambo-Breadcrumb">
+            <div class="container">
+               <div class="row">
+                  <div class="col-md-12">
+                     <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                           <li class="breadcrumb-item active" aria-current="page">Order Placed</li>
+                        </ol>
+                     </nav>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="all-product-grid">
+            <div class="container">
+               <div class="row justify-content-center">
+                  <div class="col-lg-6 col-md-8">
+                     <div class="order-placed-dt">
+                        <i class="uil uil-check-circle icon-circle"></i>
+                        <h2>Order Successfully Placed</h2>
+                        <p>Thank you for your order!</p>
+                     
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      {% include './index_files/footer.html' %}
+      {% include './index_files/js.html' %}
+   </body>
+</html>

@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="wrapper">
+    <div class="gambo-Breadcrumb">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">User Dashboard</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dashboard-group">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="user-dt">
+                        <div class="user-img">
+                            <img src="{% static 'images\avatar\img-5.jpg' %}" alt="">
+                            <div class="img-add">													
+                                <input type="file" id="file">
+                                <label for="file"><i class="uil uil-camera-plus"></i></label>
+                            </div>
+                        </div>
+                        
+                        <h4>{{request.user.username }}</h4>
+                        <h6>{{request.user.email }}</h6>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>	
+    <div class="">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-4">
+                    <div class="left-side-tabs">
+                        <div class="dashboard-left-links">
+                           
+                            
+                            <a href="#" class="user-item active"><i class="uil uil-heart"></i>Shopping Wishlist</a>
+                            <a href='{% url "accounts:logout" %}' class="user-item"><i class="uil uil-exit"></i>Logout</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-9 col-md-8">
+                    <div class="dashboard-right">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="main-title-tab">
+                                    <h4><i class="uil uil-heart"></i>Shopping Wishlist</h4>
+                                </div>
+                            </div>								
+                            <div class="col-lg-12 col-md-12">
+                                <div class="pdpt-bg">
+                                    <div class="wishlist-body-dtt">
+                                        {% if cart.products %}
+                                        {% for p in cart.products.all %}
+                                        <div class="cart-item">
+                                            <div class="cart-product-img">
+                                                <img height="120" width="120" src="{{p.product_Image_Field.url }}" alt="">
+                                                {% if p.product_discount_price %}
+                                                <div class="offer-badge">{{p.get_percentage_off }}% OFF</div>
+                                                {% endif %}
+                                            </div>
+                                            <div class="cart-text">
+                                                <h4>{{p.product_title }}</h4>
+                                                {% if p.product_discount_price %}
+                                                <div class="product-price">Ksh : {{p.product_discount_price}} <span> ksh : {{p.product_price}}</span></div>
+                                                {% else %}
+                                                <div class="product-price">Ksh : {{p.product_price}} </div>
+                                                {% endif %}
+                                                <form method ='POST' action = '{% url "carts:cart_update" %}' class="form">
+                                                    {% csrf_token %}
+                                                    <input type="hidden" name="product_id" value="{{p.id}}"/>
+                                                
+                                                    <button type="submit" class="cart-close-btn"><i class="uil uil-trash-alt"></i></button>
+                                               </form>
+                                               
+                                            </div>		
+                                        </div>
+                                        {% endfor %}
+                                        {% endif %}
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>	
+        </div>	
+    </div>	
+</div>
+{% endblock %}

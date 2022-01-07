@@ -1,0 +1,89 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    {% include './index_files/head.html' %}
+   <body>
+    {% include './index_files/category_model.html' %}
+    {% include './index_files/search_model.html' %}
+    {% include './index_files/bs_canvas.html' %}
+    {% include './index_files/header.html' %}
+      <div class="wrapper">
+         <div class="gambo-Breadcrumb">
+            <div class="container">
+               <div class="row">
+                  <div class="col-md-12">
+                     <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                           <li class="breadcrumb-item"><a href="{% url 'vendors:vendor_shop_index' %}">Home</a></li>
+                           
+                        </ol>
+                     </nav>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="all-product-grid">
+            <div class="container">
+               <div class="row">
+                  <div class="col-lg-12">
+                     <div class="product-top-dt">
+                        <div class="product-left-title">
+                           <h2>{{name}}</h2>
+                        </div>
+                         
+                        <div class="product-sort">
+                           
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="product-list-view">
+                  <div class="row">
+                      {% if all_products %}
+                      {% for f in all_products %}
+                   
+                     <div class="col-lg-3 col-md-6">
+                        <div class="product-item mb-30">
+                           <a href="{{f.vendor_absolute_url}}" class="product-img">
+                              <img src="{{f.product_Image_Field.url}}" alt="">
+                              <div class="product-absolute-options">
+                           
+                                 <span class="like-icon" title="wishlist"></span>
+                              </div>
+                           </a>
+                           <div class="product-text-dt">
+                              <p>Available<span>(In Stock)</span></p>
+                              <h4>{{f.product_title}}</h4>
+                              <div class="product-price">Ksh {{fe.product_price}}</div>
+                              <div class="qty-cart">
+                                 <div class="quantity buttons_added">
+                                    <input type="button" value="-" class="minus minus-btn">
+                                    <input type="number" step="1" name="quantity" value="1" class="input-text qty text">
+                                    <input type="button" value="+" class="plus plus-btn">
+                                 </div>
+                                 <span class="cart-icon"><i class="uil uil-shopping-cart-alt"></i></span>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+
+                     {% endfor %}
+
+                     {% endif %}
+                    
+                     <div class="col-md-12">
+                        <div class="more-product-btn">
+                           <button class="show-more-btn hover-btn" onclick="window.location.href = '#';">Show More</button>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      {% include './index_files/footer.html' %}
+      {% include './index_files/js.html' %}
+     
+   </body>
+</html>

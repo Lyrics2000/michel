@@ -1,0 +1,256 @@
+{% extends 'base.html' %}
+{% load static  %}
+{% block extrahead %}
+<link href="{% static 'css\step-wizard.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+{% if not billing_profile %}
+<div class="wrapper">
+    <div class="gambo-Breadcrumb">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Offers</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="all-product-grid mb-14">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="default-title mt-4">
+                        <h2>Sign In to proceed to Checkout</h2>
+                        <img src="{% static 'images\line.svg' %}" alt="">
+                    </div>
+
+                    <div class="default-title mt-4">
+                        <div class="model-footer">
+                            <a  href='{% url "accounts:signin" %}'   class="btn btn-success btn-lg">Sign In</a>
+                            <a href='{% url "accounts:signup" %}' class="btn btn-secondary btn-lg">Sign Up</a>
+                        </div>
+                    </div>
+
+                    <div class="default-title mt-4">
+                        <div class="model-footer">
+                                <form method = "POST" action = "{% url "accounts:guest_register" %}">
+                                {% csrf_token %}
+                                {% comment %} {{guest_form.as_p}} {% endcomment %}
+                                <button class="btn btn-danger btn-lg">Continue Withought Sign In</button>
+                            </form>
+                        </div>
+                    </div>
+
+                     <div class="default-title mt-4">
+                        <div class="model-footer">
+                                
+                                
+                                <a href="https://wa.me/message/R6TDAP5X3WIHM1" class="btn btn-success btn-lg">Order On WhatsApp</a>
+                            
+                        </div>
+                    </div>
+                </div>
+                
+                {% if allbanners %}
+                {% for b in allbanners %}
+                <div class="col-lg-4">
+                    <a href="#" class="offers-item">
+                        <div class="offer-img">
+                            <img height="250" width="250" src="{{b.product_Image_Field.url}}" alt="">
+                        </div>
+                       
+                    </a>
+                </div>
+                {% endfor %}
+
+                {% endif %}
+
+
+            </div>
+        </div>
+    </div>  
+</div>
+{% else %}
+
+<div class="wrapper">
+    <div class="gambo-Breadcrumb">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="all-product-grid">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-7">
+                    <div id="checkout_wizard" class="checkout accordion left-chck145">
+                        <div class="checkout-step">
+                            <div class="checkout-card" id="headingFour">
+                                <span class="checkout-step-number">3</span>
+                                <h4 class="checkout-step-title"> 
+                                    <button class="wizard-btn collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">Payment</button>
+                                </h4>
+                            </div>
+                            <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#checkout_wizard">
+                                <div class="checkout-step-body">
+                                    <div class="payment_method-checkout">   
+                                        <div class="row">   
+                                            <div class="col-md-12">
+                                                <div class="rpt100">                                                    
+                                                    <ul class="radio--group-inline-container_1">
+                                                        <li>
+                                                        <ol>
+                                                        <li>
+                                                            <div class="radio-item_1">
+                                                                <input id="cashondelivery1" value="cashondelivery" name="paymentmethod" type="radio" data-minimum="50.0">
+                                                                 <label for="cashondelivery1" class="radio-label_1"></label>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <img height="50" width="120" src="{% static 'images\note.jpg' %}" alt="Cah On Delivery">
+                                                            </li>
+                                                        </ol>
+                                                        </li>
+                                                        <li>
+                                                        <ol>
+                                                        <li>
+                                                            <div class="radio-item_1">
+                                                                <input id="card1" value="card" name="paymentmethod" type="radio" data-minimum="50.0">
+                                                               <label for="card1" class="radio-label_1"></label>
+                                                            </div>
+                                                            </li>
+                                                            <li>
+                                                             <img height="50" width="120" src="https://i2.wp.com/gadgets-africa.com/wp-content/uploads/2020/04/m-pesa-938.jpg?resize=800%2C380&ssl=1" alt="Mpesa">
+                                                        </li>
+                                                        </ol>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="form-group return-departure-dts" data-method="cashondelivery">                                                          
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <div class="pymnt_title">
+                                                                <h4>Cash on Delivery</h4>
+                                                                {% comment %} <p>Cash on Delivery will not be available if your order value exceeds $10.</p> {% endcomment %}
+                                                                
+                                                                <!-- cash on delivery -->
+                                                                <a href="{% url 'mpesa:cash_on_delivery' %}" class="next-btn16 hover-btn">Place Order</a>
+                                                            </div>
+                                                        </div>                                                      
+                                                    </div>
+                                                </div>
+                                                <div class="form-group return-departure-dts" data-method="card">                                                            
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <div class="pymnt_title">
+                                                                <h4>Mpesa Payments</h4>
+                                                                {% comment %} <p>Cash on Delivery will not be available if your order value exceeds $10.</p> {% endcomment %}
+                                                                <!-- mpesa index -->
+                                                                <a href="{% url 'mpesa:mpesaindex' %}" class="next-btn16 hover-btn">Place Order</a>
+                                                            </div>
+                                                        </div>                                                      
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-5">
+                    <div class="pdpt-bg mt-0">
+                        <div class="pdpt-title">
+                            <h4>Order Summary</h4>
+                        </div>
+                        <div class="right-cart-dt-body">
+                            {% if cart.products %}
+                            
+                            {% for p in cart.products.all %}
+                            <div class="cart-item border_radius">
+                                <div class="cart-product-img">
+                    
+                                    <img height="100" width="100" src="{{p.product_Image_Field.url}}" alt="">
+                                    {% if p.product_discount_price %}
+                                    <div class="offer-badge">{{p.get_percentage_off}}% OFF</div>
+                                    {% endif %}
+                                </div>
+                                <div class="cart-text">
+                                    <h4>{{p.product_title }}</h4>
+                                    <h4>1000gs</h4>
+                                    {% if p.product_discount_price %}
+                                    <div class="cart-item-price">Ksh(per 1000g):{{p.product_discount_price}}<span>Ksh(per 1000g):{{p.product_price}}</span></div>
+                                    {% else %}
+                                    <div class="cart-item-price">Ksh(per 1000g):{{p.product_price}}</div>
+                                    {% endif %}
+
+                                    <form method ='POST' action = '{% url "carts:cart_update" %}' class="form">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="product_id" value="{{p.id}}"/>
+                                    
+                                        <button type="submit" class="cart-close-btn"><i class="uil uil-multiply"></i></button>
+                                   </form>
+                                    
+                                </div>      
+                            </div>
+                            
+                        
+                           
+                            {% endfor %}
+                           
+                            {% endif %}
+                        </div>
+                        <div class="total-checkout-group">
+                            <div class="cart-total-dil">
+                                <h4>Order Total</h4>
+                                <span>Ksh : {{object.cart.total }}</span>
+                            </div>
+                            
+                        </div>
+                        
+            
+                        <div class="payment-secure">
+                            <i class="uil uil-padlock"></i>Secure checkout
+                        </div>
+                    </div>
+                    
+                    <div class="checkout-safety-alerts">
+                        <p><i class="uil uil-sync"></i>Personaized Seamless Customer Service</p>
+                        <p><i class="uil uil-check-square"></i>100% Fresh Products</p>
+                        <p><i class="uil uil-shield-check"></i>Secure Payments</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>  
+</div>
+
+{% endif %}
+{% endblock %}
+
+{% block extrajs %}
+<script>
+    
+    function activatePlacesSearch(){
+        var input = document.getElementById('search_id');
+        var autocomplete = new google.maps.places.Autocomplete(input);
+
+    }
+</script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{google_api}}&libraries=places&callback=activatePlacesSearch"></script>
+{% endblock %}

@@ -1,0 +1,131 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, shrink-to-fit=9">
+        <meta name="description" content="Gambolthemes">
+        <meta name="author" content="Gambolthemes">
+        <title>Gambo - Checkout</title>
+        <link rel="icon" type="image/png" href="images/fav.png">
+        <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        <link href='vendor/unicons-2.0.1/css/unicons.css' rel='stylesheet'>
+        <link href="{% static 'frontend/css/style.css' %}" rel="stylesheet">
+        <link href="{% static 'frontend/css/responsive.css' %}" rel="stylesheet">
+        <link href="{% static 'frontend/css/night-mode.css' %}" rel="stylesheet">
+        <link href="{% static 'frontend/css/step-wizard.css' %}" rel="stylesheet">
+        <link href="{% static 'frontend/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet">
+        <link href="{% static 'frontend/vendor/OwlCarousel/assets/owl.carousel.css' %}" rel="stylesheet">
+        <link href="{% static 'frontend/vendor/OwlCarousel/assets/owl.theme.default.min.css' %}" rel="stylesheet">
+        <link href="{% static 'frontend/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="{% static 'frontend/vendor/semantic/semantic.min.css' %}">
+     </head>
+   <body>
+    {% include './index_files/category_model.html' %}
+    {% include './index_files/search_model.html' %}
+    {% include './index_files/bs_canvas.html' %}
+    {% include './index_files/header.html' %}
+      <div class="wrapper">
+         <div class="gambo-Breadcrumb">
+            <div class="container">
+               <div class="row">
+                  <div class="col-md-12">
+                     <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                           <li class="breadcrumb-item"><a href="{% url 'vendors:vendor_shop_index' %}">Home</a></li>
+                           <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+                        </ol>
+                     </nav>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="all-product-grid">
+            <div class="container">
+               <div class="row">
+                  <div class="col-lg-8 col-md-7">
+                     <div id="checkout_wizard" class="checkout accordion left-chck145">
+                        <div class="checkout-step">
+                           <div class="checkout-card" id="headingOne">
+                              <span class="checkout-step-number">1</span>
+                              <h4 class="checkout-step-title">
+                                 <button class="wizard-btn" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"> Phone Via Mpesa</button>
+                              </h4>
+                           </div>
+                           <div id="collapseOne" class="collapse in show" data-parent="#checkout_wizard">
+                              <div class="checkout-step-body">
+                                 <p>We need your safaricom phone number to be able to pay for product.</p>
+                                 <p class="phn145">Number format <span>07XXXXXXXXX</span><a class="edit-no-btn hover-btn" data-toggle="collapse" href="#edit-number">Pay</a></p>
+                                 <div class="collapse" id="edit-number">
+                                    <div class="row">
+                                       <div class="col-lg-8">
+                                          <div class="checkout-login">
+                                             <form method="POST" action="{% url 'mpesa:lipa_na_mpesa_online_customer' %}">
+                                                {% csrf_token %}
+                                                <div class="login-phone">
+                                                   <input name="phone" type="text" class="form-control" placeholder="Phone Number">
+                                                </div>
+                                                <button type="submit" class="chck-btn hover-btn"  data-toggle="collapse" >Pay Via Mpesa</button>
+                                             </form>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                                
+                              </div>
+                           </div>
+                        </div>
+                      
+  
+                       
+                     </div>
+                  </div>
+                  <div class="col-lg-4 col-md-5">
+                      
+                     <div class="pdpt-bg mt-0">
+                        <div class="pdpt-title">
+                           <h4>Order Summary</h4>
+                        </div>
+                        {% if cart_quantity  %}
+                        {% for f in cart_quantity %}
+                        <div class="right-cart-dt-body">
+                            <div class="cart-item border_radius">
+                               <div class="cart-product-img">
+                                  <img src="{{f.product.product_Image_Field.url}}" alt="">
+                                
+                               </div>
+                               <div class="cart-text">
+                                  <h4>{{f.product.product_title}}</h4>
+                                  <div class="cart-item-price">Ksh {{f.product.product_price}} X {{f.quantity}} = Ksh {{f.total}}</div>
+                                  <button type="button" class="cart-close-btn"><i class="uil uil-multiply"></i></button>
+                               </div>
+                            </div>
+                         </div>
+                         {% endfor %}
+                         {% endif %}
+                      
+                       
+                        <div class="main-total-cart">
+                           <h2>Total</h2>
+                           <span>Ksh {{total}}</span>
+                        </div>
+                        <div class="payment-secure">
+                           <i class="uil uil-padlock"></i>Secure checkout
+                        </div>
+                     </div>
+                   
+                     <div class="checkout-safety-alerts">
+                        <p><i class="uil uil-sync"></i>100% Replacement Guarantee</p>
+                        <p><i class="uil uil-check-square"></i>100% Genuine Products</p>
+                        <p><i class="uil uil-shield-check"></i>Secure Payments</p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      {% include './index_files/footer.html' %}
+      {% include './index_files/js.html' %}
+   </body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+   {% include './vendor_index/head.html' %}
+   <body class="sb-nav-fixed">
+      {% include './vendor_index/nav.html' %}
+      <div id="layoutSidenav">
+         {% include './vendor_index/sidebar.html' %}
+         <div id="layoutSidenav_content">
+            <main>
+               <div class="container-fluid">
+                  <h2 class="mt-30 page-title">Products</h2>
+                  <ol class="breadcrumb mb-30">
+                     <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                     <li class="breadcrumb-item active">Products</li>
+                  </ol>
+                  <div class="row justify-content-between">
+                   
+                    
+                     
+                     <div class="col-lg-12 col-md-12">
+                        <div class="card card-static-2 mt-30 mb-30">
+                           <div class="card-title-2">
+                              <h4>All Areas</h4>
+                           </div>
+                           <div class="card-body-table">
+                              <div class="table-responsive">
+                                 <table class="table ucp-table table-hover">
+                                    <thead>
+                                       <tr>
+                     
+                                          <th style="width:60px">ID</th>
+                                          <th style="width:100px">Image</th>
+                                          <th>Name</th>
+                                          <th>Category</th>
+                                        
+                                          <th>Status</th>
+                                          <th>Action</th>
+                                       </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% if all_products %}
+                                        {% for f in all_products  %}
+                                       <tr>
+  
+                                          <td>{{f.id}}</td>
+                                          <td>
+                                             <div class="cate-img-5">
+                                                <img src="{{f.product_Image_Field.url}}" alt="">
+                                             </div>
+                                          </td>
+                                          <td>{{f.product_title}}</td>
+                                          <td>{{f.product_category.category_name}}</td>
+                                          {% if f.Active %}
+                                          <td><span class="badge-item badge-status">Active</span></td>
+
+                                          
+                                          {% else %}
+                                          <td><span style="background:blue" class="badge-item badge-status">Active</span></td>
+
+
+                                          {% endif %}
+                                          <td class="action-btns">
+                                             <a href="{{f.vendor_get_product_view}}" class="view-shop-btn" title="View"><i class="fas fa-eye"></i></a>
+                                             <a href="{{f.resell_product}}" class="edit-btn" title="Edit"><i class="fas fa-edit"></i></a>
+                                          </td>
+                                       </tr>
+                                       {% endfor %}
+                                       {% endif %}
+                                     
+                                  
+                                    </tbody>
+                                 </table>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </main>
+            <footer class="py-4 bg-footer mt-auto">
+               <div class="container-fluid">
+                  <div class="d-flex align-items-center justify-content-between small">
+                     <div class="text-muted-1">© 2020 <b>Gambo Supermarket</b>. by <a href="https://themeforest.net/user/gambolthemes">Gambolthemes</a></div>
+                     <div class="footer-links">
+                        <a href="https://gambolthemes.net/html-items/gambo_supermarket_demo/privacy_policy.html">Privacy Policy</a>
+                        <a href="https://gambolthemes.net/html-items/gambo_supermarket_demo/term_and_conditions.html">Terms &amp; Conditions</a>
+                     </div>
+                  </div>
+               </div>
+            </footer>
+         </div>
+      </div>
+      {% include './farmer_index/js.html' %}
+   </body>
+</html>

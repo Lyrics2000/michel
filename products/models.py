@@ -51,6 +51,12 @@ class Category(models.Model):
             'id': self.id
         })
 
+    def vendor_category_detailed(self):
+        
+        return reverse("vendors:category_detailed_product", kwargs={
+            'id': self.id
+        })
+
     
 
 class ProductQuerySet(models.query.QuerySet):
@@ -111,13 +117,23 @@ class Products(models.Model):
     def return_two_weeks(self):
         two_weeks = datetime.timedelta(hours=336)
         return two_weeks
-    def get_absolute_url(self):
-        return reverse("products:product", kwargs={
-            'slug': self.slug
+    def vendor_absolute_url(self):
+        return reverse("vendors:product_detailed", kwargs={
+            'id': self.id
         })
 
     def get_product_view(self):
         return reverse("farmers:product_view", kwargs={
+            'id': self.id
+        })
+
+    def vendor_get_product_view(self):
+        return reverse("vendors:product_view", kwargs={
+            'id': self.id
+        })
+
+    def resell_product(self):
+        return reverse("vendors:add_product", kwargs={
             'id': self.id
         })
 

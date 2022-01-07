@@ -1,0 +1,176 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  {% include './index_files/head.html' %}
+   <body>
+      {% include './index_files/category_model.html' %}
+      {% include './index_files/search_model.html' %}
+      {% include './index_files/bs_canvas.html' %}
+      {% include './index_files/header.html' %}
+      <div class="wrapper">
+         <div class="main-banner-slider">
+            <div class="container">
+               <div class="row">
+                  <div class="col-md-12">
+                     <div class="owl-carousel offers-banner owl-theme">
+                         {% if products %}
+                         {% for f in products %}
+                        <div class="item">
+                           <div class="offer-item">
+                              <div class="offer-item-img">
+                                 <div class="gambo-overlay"></div>
+                                 <img src="{{f.product_Image_Field.url}}" alt="">
+                              </div>
+                              <div class="offer-text-dt">
+                                 <div class="offer-top-text-banner">
+                                    
+                                    <div class="top-text-1">Buy More & Save More</div>
+                                    <span>{{f.product_title}}</span>
+                                 </div>
+                                 <a href="{{f.vendor_absolute_url}}" class="Offer-shop-btn hover-btn">Shop Now</a>
+                              </div>
+                           </div>
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+                       
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="section145">
+            <div class="container">
+               <div class="row">
+                  <div class="col-md-12">
+                     <div class="main-title-tt">
+                        <div class="main-title-left">
+                           <span>Shop By</span>
+                           <h2>Categories</h2>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-md-12">
+                     <div class="owl-carousel cate-slider owl-theme">
+                         {% if all_categoris %}
+                         {% for c in all_categoris  %}
+                        <div class="item">
+                           <a href="#" class="category-item">
+                              <div class="cate-img">
+                                 <img src="{{c.category_image.url}}" alt="">
+                              </div>
+                              <h4>{{c.category_name}}</h4>
+                           </a>
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+                        
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="section145">
+            <div class="container">
+               <div class="row">
+                  <div class="col-md-12">
+                     <div class="main-title-tt">
+                        <div class="main-title-left">
+                           <span>For You</span>
+                           <h2>Top Featured Products</h2>
+                        </div>
+                        <a href="{% url 'vendors:featured_products' %}" class="see-more-btn">See All</a>
+                     </div>
+                  </div>
+                  <div class="col-md-12">
+                     <div class="owl-carousel featured-slider owl-theme">
+                         {% if featured_products %}
+                         {% for fe in featured_products  %}
+                        <div class="item">
+                           <div class="product-item">
+                              <a href="{{fe.vendor_absolute_url}}" class="product-img">
+                                 <img src="{{fe.product_Image_Field.url}}" alt="">
+                                 <div class="product-absolute-options">
+                                    
+                                    <span class="like-icon" title="wishlist"></span>
+                                 </div>
+                              </a>
+                              <div class="product-text-dt">
+                                 <p>Available<span>(In Stock)</span></p>
+                                 <h4>{{fe.product_title}}</h4>
+                                 <div class="product-price">Ksh {{fe.product_price}}</div>
+                                 <div class="qty-cart">
+                                    <div class="quantity buttons_added">
+                                       <input type="button" value="-" class="minus minus-btn">
+                                       <input type="number" step="1" name="quantity" value="1" class="input-text qty text">
+                                       <input type="button" value="+" class="plus plus-btn">
+                                    </div>
+                                    <span class="cart-icon"><i class="uil uil-shopping-cart-alt"></i></span>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+                        
+                       
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         
+        
+         <div class="section145">
+            <div class="container">
+               <div class="row">
+                  <div class="col-md-12">
+                     <div class="main-title-tt">
+                        <div class="main-title-left">
+                           <span>For You</span>
+                           <h2>Added New Products</h2>
+                        </div>
+                        <a href="{% url 'vendors:all_products' %}" class="see-more-btn">See All</a>
+                     </div>
+                  </div>
+                  <div class="col-md-12">
+                     <div class="owl-carousel featured-slider owl-theme">
+                         {% if products %}
+                         {% for p in products  %}
+                        <div class="item">
+                           <div class="product-item">
+                              <a href="{{p.vendor_absolute_url}}" class="product-img">
+                                 <img src="{{p.product_Image_Field.url}}" alt="">
+                                 <div class="product-absolute-options">
+                                    <span class="offer-badge-1">New</span>
+                                    <span class="like-icon" title="wishlist"></span>
+                                 </div>
+                              </a>
+                              <div class="product-text-dt">
+                                 <p>Available<span>(In Stock)</span></p>
+                                 <h4>{{p.product_title}}</h4>
+                                 <div class="product-price">Ksh {{p.product_price}}</div>
+                                 <div class="qty-cart">
+                                    <div class="quantity buttons_added">
+                                       <input type="button" value="-" class="minus minus-btn">
+                                       <input type="number" step="1" name="quantity" value="1" class="input-text qty text">
+                                       <input type="button" value="+" class="plus plus-btn">
+                                    </div>
+                                    <span class="cart-icon"><i class="uil uil-shopping-cart-alt"></i></span>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+                       
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      {% include './index_files/footer.html' %}
+      {% include './index_files/js.html' %}
+   </body>
+</html>

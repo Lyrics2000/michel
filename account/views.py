@@ -19,7 +19,7 @@ from django.http import HttpResponse
 # Create your views here.
 def logout_user(request):
     logout(request)
-    return redirect("/")
+    return redirect("account:sign_in")
 
 def index(request):
 

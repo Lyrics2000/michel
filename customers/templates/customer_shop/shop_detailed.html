@@ -1,0 +1,220 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    {% include './index_files/head.html' %}
+   <body>
+      <div class="icon-bar">
+         <a href="#" class="facebook" title="Share"><i class="fab fa-facebook-f"></i></a>
+         <a href="#" class="twitter" title="Share"><i class="fab fa-twitter"></i></a>
+         <a href="#" class="google" title="Share"><i class="fab fa-google"></i></a>
+         <a href="#" class="linkedin" title="Share"><i class="fab fa-linkedin-in"></i></a>
+         <a href="#" class="whatsapp" title="Share"><i class="fab fa-whatsapp"></i></a>
+      </div>
+      {% include './index_files/category_model.html' %}
+      {% include './index_files/search_model.html' %}
+      {% include './index_files/bs_canvas.html' %}
+      {% include './index_files/header.html' %}
+      <div class="wrapper">
+         <div class="gambo-Breadcrumb">
+            <div class="container">
+               <div class="row">
+                  <div class="col-md-12">
+                     <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                           <li class="breadcrumb-item"><a href="/">Home</a></li>
+            
+                           <li class="breadcrumb-item active" aria-current="page">{{single_product.product_title}}</li>
+                        </ol>
+                     </nav>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="all-product-grid">
+            <div class="container">
+               <div class="row">
+                  <div class="col-lg-12">
+                     <div class="product-dt-view">
+                        <div class="row">
+                           <div class="col-lg-4 col-md-4">
+                              <div style="width:100%;height:100%" id="sync1" class="owl-theme">
+                                 <div style="width:100%;height:100%" class="item">
+                                    <img style="width:100%;height:100%" src="{{single_product.product_image.url}}" alt="">
+                                 </div>
+                                 
+                               
+                              </div>
+                              
+                           </div>
+                           <div class="col-lg-8 col-md-8">
+                              <div class="product-dt-right">
+                                 <h2>{{single_product.product.product_title}}</h2>
+                                 <div class="no-stock">
+                                    <p class="pd-no">Product No.<span>{{single_product.id}}</span></p>
+                                    <p class="stock-qty">Available<span>(Instock)</span></p>
+                                 </div>
+                                
+                                 <p class="pp-descp">{{single_product.product.product_overview}}</p>
+                                 <div class="product-group-dt">
+                                    <ul>
+                                       <li>
+                                          <div class="main-price color-discount">Price<span>Ksh {{single_product.product_price}}</span></div>
+                                       </li>
+                                      
+                                    </ul>
+                                    <form method="POST" action="{% url 'cart:cart_update_customer' %}">
+                                        {% csrf_token %}
+                                    <ul class="gty-wish-share">
+                                       <li>
+                                          <div class="qty-product">
+                                             <div class="quantity buttons_added">
+                                                <input type="hidden" name="product_id" value="{{single_product.id}}" >
+                                                <input type="button" value="-" class="minus minus-btn">
+                                                <input type="number" step="1" name="quantity" value="1" class="input-text qty text">
+                                                <input type="button" value="+" class="plus plus-btn">
+                                             </div>
+                                          </div>
+                                       </li>
+                                       <li><span class="like-icon save-icon" title="wishlist"></span></li>
+                                    </ul>
+                                    <ul class="ordr-crt-share">
+                                       <li><button class="add-cart-btn hover-btn"><i class="uil uil-shopping-cart-alt"></i>Add to Cart</button></li>
+                                       
+                                    </ul>
+                                </form>
+                                 </div>
+                                 <div class="pdp-details">
+                                    <ul>
+                                       <li>
+                                          <div class="pdp-group-dt">
+                                             <div class="pdp-icon"><i class="uil uil-usd-circle"></i></div>
+                                             <div class="pdp-text-dt">
+                                                <span>Lowest Price Guaranteed</span>
+                                                <p>Get difference refunded if you find it cheaper anywhere else.</p>
+                                             </div>
+                                          </div>
+                                       </li>
+                                       <li>
+                                          <div class="pdp-group-dt">
+                                             <div class="pdp-icon"><i class="uil uil-cloud-redo"></i></div>
+                                             <div class="pdp-text-dt">
+                                                <span>Easy Returns & Refunds</span>
+                                                <p>Return products at doorstep and get refund in seconds.</p>
+                                             </div>
+                                          </div>
+                                       </li>
+                                    </ul>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col-lg-4 col-md-12">
+                     <div class="pdpt-bg">
+                        <div class="pdpt-title">
+                           <h4>More Like This</h4>
+                        </div>
+                        <div class="pdpt-body scrollstyle_4">
+                            {% if more_like_this %}
+                            {% for m in more_like_this %}
+                           <div class="cart-item border_radius">
+                              <a href="{{m.customer_absolute_url}}" class="cart-product-img">
+                                 <img src="{{m.product_image.url}}" alt="">
+                                 
+                              </a>
+                              <div class="cart-text">
+                                 <h4>{{m.product.product_title}}</h4>
+                              
+                                 <div class="qty-group">
+                                    <div class="quantity buttons_added">
+                                       
+                                    </div>
+                                    <div class="cart-item-price">Ksh {{m.product_price}}</div>
+                                 </div>
+                              </div>
+                           </div>
+                           {% endfor %}
+                           {% endif %}
+                         
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-lg-8 col-md-12">
+                     <div class="pdpt-bg">
+                        <div class="pdpt-title">
+                           <h4>Product Details</h4>
+                        </div>
+                        <div class="pdpt-body scrollstyle_4">
+                           <div class="pdct-dts-1">
+                              <div class="pdct-dt-step">
+                                 <h4>Description</h4>
+                                 <p>{{single_product.product.product_full_description}}.</p>
+                              </div>
+                             
+                              
+                             
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="section145">
+            <div class="container">
+               <div class="row">
+                  <div class="col-md-12">
+                     <div class="main-title-tt">
+                        <div class="main-title-left">
+                           <span>For You</span>
+                           <h2>Top Featured Products</h2>
+                        </div>
+                        <a href="#" class="see-more-btn">See All</a>
+                     </div>
+                  </div>
+                  <div class="col-md-12">
+                     <div class="owl-carousel featured-slider owl-theme">
+                         {% if featured_products %}
+                         {% for fe in  featured_products %}
+                        <div class="item">
+                           <div class="product-item">
+                              <a href="{{fe.customer_absolute_url}}" class="product-img">
+                                 <img src="{{fe.product_image.url}}" alt="">
+                                 <div class="product-absolute-options">
+                                    
+                                    <span class="like-icon" title="wishlist"></span>
+                                 </div>
+                              </a>
+                              <div class="product-text-dt">
+                                 <p>Available<span>(In Stock)</span></p>
+                                 <h4>{{fe.product_title}}</h4>
+                                 <div class="product-price">Ksh {{fe.product_price}}</div>
+                                 <div class="qty-cart">
+                                    <div class="quantity buttons_added">
+                                       <input type="button" value="-" class="minus minus-btn">
+                                       <input type="number" step="1" name="quantity" value="1" class="input-text qty text">
+                                       <input type="button" value="+" class="plus plus-btn">
+                                    </div>
+                                    <span class="cart-icon"><i class="uil uil-shopping-cart-alt"></i></span>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+                      
+                       
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      {% include './index_files/footer.html' %}
+      {% include './index_files/js.html' %}
+   </body>
+</html>
