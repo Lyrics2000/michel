@@ -37,9 +37,19 @@ def index(request):
         user = authenticate(request,username = username, password = password )
         print("jjja",user)
         if user is not None:
+            print("kkks")
         
             login(request,user)
             uss_id = user.id 
+            if user.type is not None:
+                if user.type == "Customer":
+                    return redirect("customers:index")
+
+                elif user.type == "Farmer":
+                    return redirect("armers:index")
+
+                elif user.type == "Vendor":
+                    return redirect("vendors:index")
             
             return redirect("farmers:index")
         else:
@@ -58,7 +68,7 @@ def signup(request):
             username = request.POST.get("username")
             first_name = request.POST.get("first_name")
             last_name =  request.POST.get("last_name")
-   
+            typpe = request.POST.get("type")
             phone =  request.POST.get("phone")
             email = request.POST.get('email')
             password = request.POST.get("password")
@@ -72,6 +82,7 @@ def signup(request):
                 user.last_name = last_name
                 user.first_name = first_name
                 user.phone = phone
+                user.type = typpe
                 user.is_active =  False
                 user.save()
                 current_site = get_current_site(request)

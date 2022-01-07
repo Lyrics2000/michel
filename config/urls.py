@@ -8,7 +8,9 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth/',include('account.urls',namespace="account")),
-    path('farmers/',include('farmers.urls',namespace="farmers"))
+    path('farmers/',include('farmers.urls',namespace="farmers")),
+    path('vendors/',include('vendors.urls',namespace="vendors")),
+    path('customers/',include('customers.urls',namespace="customers"))
 ]
 
 if settings.DEBUG:

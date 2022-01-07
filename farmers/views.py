@@ -132,7 +132,7 @@ def delete_category(request,id):
     return redirect("farmers:all_categories")
 
 
-
+@login_required(login_url='account:sign_in') 
 def edit_cat(request):
      if request.method == "POST":
         id =  request.POST.get("id")
