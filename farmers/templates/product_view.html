@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+   {% include './farmer_index/head.html' %}
+   <body class="sb-nav-fixed">
+      {% include './farmer_index/nav.html' %}
+      <div id="layoutSidenav">
+         {% include './farmer_index/sidebar.html' %}
+         <div id="layoutSidenav_content">
+            <main>
+               <div class="container-fluid">
+                  <h2 class="mt-30 page-title">Shops</h2>
+                  <ol class="breadcrumb mb-30">
+                     <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                     <li class="breadcrumb-item"><a href="shops.html">Shops</a></li>
+                     <li class="breadcrumb-item active">Shop view</li>
+                  </ol>
+                  <div class="row">
+                     <div class="col-lg-5 col-md-6">
+                        <div class="card card-static-2 mb-30">
+                           <div class="card-body-table">
+                              <div class="shopowner-content-left text-center pd-20">
+                                 <div class="shop_img">
+                                    <img src="{{product.product_Image_Field.url}}" alt="">
+                                 </div>
+                                
+                                 <div class="shopowner-dts">
+                                    <div class="shopowner-dt-list">
+                                       <span class="left-dt">Product name</span>
+                                       <span class="right-dt">{{product.product_title}}</span>
+                                    </div>
+
+                                    <div class="shopowner-dts">
+                                        <div class="shopowner-dt-list">
+                                           <span class="left-dt">Product Category name</span>
+                                           <span class="right-dt">{{product.product_category.category_name}}</span>
+                                        </div>
+                                    <div class="shopowner-dt-list">
+                                       <span class="left-dt">Product Price</span>
+                                       <span class="right-dt">Ksh {{product.product_price}}</span>
+                                    </div>
+                                    <div class="shopowner-dt-list">
+                                       <span class="left-dt">Status</span>
+                                       {% if product.Active %}
+                                       <span class="right-dt">Active</span>
+                                       {% else %}
+                                       <span class="right-dt">InActive</span>
+
+                                       {% endif %}
+                                    </div>
+
+                                    <div class="shopowner-dt-list">
+                                        <span class="left-dt">Featured</span>
+                                        {% if product.featured_product %}
+                                        <span class="right-dt">Yes</span>
+                                        {% else %}
+                                        <span class="right-dt">No</span>
+ 
+                                        {% endif %}
+                                     </div>
+                                     <div class="shopowner-dt-list">
+                                        <span class="left-dt">Short Description</span>
+                                        <span class="right-dt">{{product.product_overview}}</span>
+                                     </div>
+
+                                     <div class="shopowner-dt-list">
+                                        <span class="left-dt">Long Description</span>
+                                        <span class="right-dt">{{product.product_full_description}}</span>
+                                     </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </main>
+            <footer class="py-4 bg-footer mt-auto">
+               <div class="container-fluid">
+                  <div class="d-flex align-items-center justify-content-between small">
+                     <div class="text-muted-1">© 2020 <b>Gambo Supermarket</b>. by <a href="https://themeforest.net/user/gambolthemes">Gambolthemes</a></div>
+                     <div class="footer-links">
+                        <a href="https://gambolthemes.net/html-items/gambo_supermarket_demo/privacy_policy.html">Privacy Policy</a>
+                        <a href="https://gambolthemes.net/html-items/gambo_supermarket_demo/term_and_conditions.html">Terms &amp; Conditions</a>
+                     </div>
+                  </div>
+               </div>
+            </footer>
+         </div>
+      </div>
+      {% include './farmer_index/js.html' %}
+   </body>
+</html>
