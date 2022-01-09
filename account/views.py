@@ -46,7 +46,7 @@ def index(request):
                     return redirect("customers:index")
 
                 elif user.type == "Farmer":
-                    return redirect("armers:index")
+                    return redirect("farmers:index")
 
                 elif user.type == "Vendor":
                     return redirect("vendors:index")
