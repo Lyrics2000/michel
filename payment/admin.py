@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.db import models
-from .models import MpesaQueryCustomer, MpesaResquest,MpesaQuery, MpesaResquestCustomer,Paid, PaidCustomer
+from .models import (MpesaQueryCustomer, MpesaResquest,MpesaQuery, MpesaResquestCustomer,Paid, PaidCustomer,
+)
 
 
 
@@ -26,6 +27,7 @@ admin.site.register(Paid)
 
 
 
+
 # customer
 
 class MpesaLipaAdminCustomer(admin.ModelAdmin):
@@ -44,7 +46,7 @@ class MpesaQueryAdminCustomer(admin.ModelAdmin):
         model = MpesaQueryCustomer
 
 admin.site.register(MpesaQueryCustomer,MpesaQueryAdminCustomer)
-admin.site.register(PaidCustomer)
+
 
 
 

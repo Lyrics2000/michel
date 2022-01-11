@@ -5,11 +5,44 @@ from products.models import (Category, ProductDiscount,
 Products
 )
 from django.contrib import messages
+from payment.models import (
+    Paid
+)
 
 # Create your views here.
 @login_required(login_url='account:sign_in') 
 def index(request):
-    return render(request,'farmer_index.html')
+
+    user_obj =  User.objects.get(id =  request.user.id)
+    paid_c =  Paid.objects.filter().count()
+    product_c = Products.objects.filter(user =  user_obj).count()
+    processing = Paid.objects.filter(processed =  True)
+    system_c = Products.objects.all().count()
+    all_orders = Paid.objects.filter(paid = True)
+
+
+
+    context = {
+        "paid_c": paid_c,
+        "product_c" : product_c  ,
+        "processing" : processing,
+        "system_c" : system_c,
+        "all_orders":all_orders
+    }
+    
+    return render(request,'farmer_index.html',context)
+
+
+@login_required(login_url='account:sign_in') 
+def farmer_products(request):
+    all_orders = Paid.objects.filter(paid = True)
+
+    context = {
+         "all_orders":all_orders
+
+    }
+    return render(request,'orders_farmer.html',context)
+
 
 
 @login_required(login_url='account:sign_in') 

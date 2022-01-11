@@ -6,8 +6,8 @@
              <a href="index.html"><img src="images/dark-logo-1.svg" alt=""></a>
           </div>
           <div class="main_logo" id="logo">
-             <a href="index.html"><img src="images/logo.svg" alt=""></a>
-             <a href="index.html"><img class="logo-inverse" src="images/dark-logo.svg" alt=""></a>
+             <a href="index.html"><img src="{% static 'images/logo.svg' %}" alt=""></a>
+             <a href="index.html"><img class="logo-inverse" src="{% static 'images/dark-logo.svg' %}" alt=""></a>
           </div>
           
           <div class="search120">
@@ -41,7 +41,7 @@
                          </span>
                          </a>
                       </div>
-                      
+                      <a href="{% url 'vendors:index' %}" class="item channel_item"><i class="uil uil-lock-alt icon__1"></i>Admin</a>
                       <a href="{% url 'account:logout' %}" class="item channel_item"><i class="uil uil-lock-alt icon__1"></i>Logout</a>
                    </div>
                 </li>
@@ -72,7 +72,7 @@
              <a href="#" class="cate__btn" data-toggle="modal" data-target="#category_model" title="Categories"><i class="uil uil-apps"></i></a>
           </div>
           <div class="header_cart order-1">
-             <a href="#" class="cart__btn hover-btn pull-bs-canvas-left" title="Cart"><i class="uil uil-shopping-cart-alt"></i><span>Cart</span><ins>{{cart_items}}</ins><i class="uil uil-angle-down"></i></a>
+             <a href="#" class="cart__btn hover-btn pull-bs-canvas-left" title="Cart"><i class="uil uil-shopping-cart-alt"></i><span>Cart</span><ins>{% if cart_items %}{{cart_items}} {% else %} {{0}} {% endif %}</ins><i class="uil uil-angle-down"></i></a>
           </div>
           <div class="search__icon order-1">
              <a href="#" class="search__btn hover-btn" data-toggle="modal" data-target="#search_model" title="Search"><i class="uil uil-search"></i></a>

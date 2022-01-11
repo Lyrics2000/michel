@@ -14,7 +14,8 @@ from .views import (
     product_view,
     add_product,
     resell_product,
-    resell_all_products
+    resell_all_products,
+    vendors_products
 
 )
 app_name = "vendors"
@@ -31,6 +32,7 @@ urlpatterns = [
     path("vendor_product_view/<id>/",product_view,name="product_view"),
     path("resell_product/<id>",add_product,name="add_product"),
     path("resell_products",resell_product,name="resell_product"),
-    path("resell_all/",resell_all_products,name="resell_all_products")
+    path("resell_all/",resell_all_products,name="resell_all_products"),
+    path("vendors/vendors_products",vendors_products,name="vendors_products")
     
 ]

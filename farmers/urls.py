@@ -9,7 +9,8 @@ from .views import (
     product_view,
     edit_category,
     edit_cat,
-    delete_category
+    delete_category,
+    farmer_products
 
 )
 
@@ -24,5 +25,6 @@ urlpatterns = [
     path('product_view/<id>/',product_view,name="product_view"),
     path('edit_cat/<id>/',edit_category,name="edit_category"),
     path('edit_category/',edit_cat,name="edit_cat"),
-    path("delete_product/<id>/",delete_category,name="delete_category")
+    path("delete_product/<id>/",delete_category,name="delete_category"),
+    path("farmer_orders/",farmer_products,name="farmer_products")
 ]

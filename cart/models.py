@@ -31,6 +31,7 @@ class CartManager(models.Manager):
 
 
 class Cart(models.Model):
+    
     user = models.ForeignKey(User,null=True,blank=True,on_delete=models.CASCADE)
     products = models.ManyToManyField(Products,blank=True)
     updates = models.DateTimeField(auto_now=True)

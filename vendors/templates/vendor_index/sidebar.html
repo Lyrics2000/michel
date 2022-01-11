@@ -3,7 +3,7 @@
     <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
        <div class="sb-sidenav-menu">
           <div class="nav">
-             <a class="nav-link active" href="index.html">
+             <a class="nav-link active" href="{% url 'vendors:index' %}">
                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                 Dashboard
              </a>
@@ -22,21 +22,13 @@
          
                 </nav>
              </div>
-             <a class="nav-link" href="orders.html">
+             <a class="nav-link" href="{% url 'vendors:vendors_products' %}">
                 <div class="sb-nav-link-icon"><i class="fas fa-cart-arrow-down"></i></div>
                 Orders
              </a>
-             <a class="nav-link" href="customers.html">
-                <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
-                Customers
-             </a>
-            
-             
+                       
            
-             <a class="nav-link" href="reports.html">
-                <div class="sb-nav-link-icon"><i class="fas fa-chart-bar"></i></div>
-                Reports
-             </a>
+           
           </div>
        </div>
     </nav>

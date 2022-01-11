@@ -4,6 +4,7 @@ from account.models import User
 from cart.models import Cart, CartQuantity
 from django.contrib import messages
 from django.db.models import Sum
+from payment.models import PaidCustomer
 from products.models import (
     Category,
     ProductQuerySet,
@@ -16,9 +17,36 @@ from .models import (
 # Create your views here.
 @login_required(login_url='account:sign_in') 
 def index(request):
-    
-    return render(request,'vendor_index.html')
 
+    user_obj =  User.objects.get(id =  request.user.id)
+    paid_c =  PaidCustomer.objects.filter().count()
+    product_c = ResellProduct.objects.filter(user =  user_obj).count()
+    processing = PaidCustomer.objects.filter(processed =  True)
+    system_c = Products.objects.all().count()
+    all_orders = PaidCustomer.objects.filter(paid = True)
+
+
+
+    context = {
+        "paid_c": paid_c,
+        "product_c" : product_c  ,
+        "processing" : processing,
+        "system_c" : system_c,
+        "all_orders":all_orders
+    }
+    
+    return render(request,'vendor_index.html',context)
+
+
+@login_required(login_url='account:sign_in') 
+def vendors_products(request):
+    all_orders = PaidCustomer.objects.filter(paid = True)
+
+    context = {
+         "all_orders":all_orders
+
+    }
+    return render(request,'orders_vendor.html',context)
 
 @login_required(login_url='account:sign_in') 
 def shop_index(request):
@@ -178,11 +206,18 @@ def category_detailed_product(request,id):
 @login_required(login_url='account:sign_in') 
 def all_products(request):
   
-    all_products =  Products.objects.all()
+    cart_items = request.session.get("cart_items")
+    all_categories = Category.objects.all()
+    all_products = Products.objects.all()
+    name = "All Products"
+
     context = {
-        'all_products':all_products
+        'all_categoris':all_categories,
+        'all_products':all_products,
+        'name':name,
+        'cart_items' : cart_items
     }
-    return render(request,'vendor_all_products.html',context)
+    return render(request,'./shop/all_products.html',context)
 
 
 @login_required(login_url='account:sign_in')

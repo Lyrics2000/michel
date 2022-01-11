@@ -49,6 +49,8 @@ class Paid(models.Model):
     cart = models.ForeignKey(Cart,on_delete=models.CASCADE)
     user =  models.ForeignKey(User,on_delete=models.CASCADE)
     paid =  models.BooleanField(default=False)
+    processed = models.BooleanField(default=False)
+
 
     def __str__(self):
         return str(self.cart)
@@ -102,6 +104,10 @@ class PaidCustomer(models.Model):
     cart = models.ForeignKey(CartCustomer,on_delete=models.CASCADE)
     user =  models.ForeignKey(User,on_delete=models.CASCADE)
     paid =  models.BooleanField(default=False)
+    processed = models.BooleanField(default=False)
 
     def __str__(self):
         return str(self.cart)
+
+
+
